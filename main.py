@@ -98,7 +98,7 @@ class Developer(Employee):
 class Manager(Employee):
 
     # do not pass iterable objects to constructors so default the value to none
-    def __init__(self,first: str, last: str, pay: int, employees=None) -> object:
+    def __init__(self, first: str, last: str, pay: int, employees=None) -> object:
         super().__init__(first, last, pay)
         
         # use if to populate the list
@@ -123,8 +123,47 @@ class Manager(Employee):
             print(f'--> {emp.fullname()}')
 
 
+class DevelopmentManager(Developer, Manager):
+    
+    # use the super keyword to inherit from both of the classes which this class needs
+    def __init__(self, first: str, last: str, pay: int, prog_lang: str, employees=None, projects=None) -> object:
+        # one init per super class
+        super().__init__(first, last, pay, prog_lang)
+        super().__init__(first, last, pay, employees)
+
+        if employees is None:
+            self.num_of_employees = []
+        else:
+            self.employees = employees
+
+        if projects is None:
+            self.projects = []
+        else:
+            self.projects = projects
+
+    def add_proj(self, proj) -> None:
+        '''Add a project to the dev manager's list of responsibilities'''
+        if proj not in self.projects:
+            self.projects.append(proj)
+
+    def remove_proj(self, proj) -> None:
+        '''Remove a project to the dev manager's list of responsibilities'''
+        if emp in self.employees:
+            self.employees.remove(emp)
+    
+    def print_proj(self) -> str:
+        '''Print the list of projects whom are the repsonsibility of the dev manager'''
+        for proj in self.projects:
+            print(f'--> {proj}')
+
 # instatiate an object of class employee
 emp_1 = Employee('John', 'Smith', 50000)
 
 # get the employee objects value for email which is generated from first and last names
 print(emp_1.email)
+
+dm_1 = DevelopmentManager('Jasper', 'van der Valk', 50000, 'Python', [emp_1], ['API'])
+print(dm_1.projects)
+print(dm_1.fullname)
+print(dm_1.employees)
+print(DevelopmentManager.num_of_employees)
