@@ -128,7 +128,10 @@ class DevelopmentManager(Developer, Manager):
     # use the super keyword to inherit from both of the classes which this class needs
     def __init__(self, first: str, last: str, pay: int, prog_lang: str, employees=None, projects=None) -> object:
         # one init per super class
+
+        # developer
         super().__init__(first, last, pay, prog_lang)
+        # manager
         super().__init__(first, last, pay, employees)
 
         if employees is None:

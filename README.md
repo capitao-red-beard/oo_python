@@ -14,6 +14,8 @@ This is a simple project which highlights some of the syntactical elements of ob
 - `sub-class`
 - `super reference`
 - `overriding`
+- `inheritance`
+- `mulitple inheritance`
 
 ## How To
 
