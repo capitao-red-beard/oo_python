@@ -22,11 +22,13 @@ class Employee:
     
     @property
     def fullname(self) -> str:
+        '''Print the full name of an employee'''
         return f'{self.first} {self.last}'
 
     # property object setter
     @fullname.setter
     def fullname(self, name: str) -> None:
+        '''Set the full name of an employee'''
         first, last = name.split(' ')
         self.first = first
         self.last = last
@@ -39,21 +41,25 @@ class Employee:
         self.last = None
 
     def apply_raise(self) -> float:
+        '''Apply a raise to the current salary'''
         self.pay = int(self.pay * self.raise_amt)
 
     # method which acts on the class definition and not on the object
     @classmethod
     def set_raise_amt(cls: type, amount: float) -> None:
+        '''Change the amount of raise increase a user will get'''
         cls.raise_amt = amount
 
     @classmethod
     def from_string(cls: type, emp_str: str) -> object:
+        '''Set an employees full name from a string'''
         first, last, pay = emp_str.split('-')
         return cls(first, last, pay)
 
     # method which does not act on the object or class but is related ot the class definition in behvaiour
     @staticmethod
     def is_workday(day: str) -> bool:
+        '''Check to see if the given date it a work day'''
         if day.weekday() == 5 or day.weekday() == 6:
             return False
         
@@ -69,9 +75,11 @@ class Employee:
 
     # dunder method can be called without referenceing the object
     def __add__(self, other: int) -> int:
+        '''Add the pay values of trwo employees'''
         return self.pay + other.pay
 
     def __len__(self) -> int:
+        '''Get the length of an employees full name'''
         return len(self.fullname())
 
 
@@ -100,14 +108,17 @@ class Manager(Employee):
             self.employees = employees
 
     def add_emp(self, emp) -> None:
+        '''Add an employee to the manager's list of responsibilities'''
         if emp not in self.employees:
             self.employees.append(emp)
 
     def remove_emp(self, emp) -> None:
+        '''Remove an employee to the manager's list of responsibilities'''
         if emp in self.employees:
             self.employees.remove(emp)
     
     def print_emps(self) -> str:
+        '''Print the list of employees whom are the repsonsibility of the manager'''
         for emp in self.employees:
             print(f'--> {emp.fullname()}')
 
